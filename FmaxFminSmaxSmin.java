@@ -6,58 +6,46 @@ public class FmaxFminSmaxSmin
 {
     public void maxMin(int arr[],int n)
     {
-    	int max=0,loc=0,min=0;
+    	int temp=0,max=0;
+    	for(int i=0;i<n-1;i++)
+    	{
+    		for(int j=0;j<n-1;j++)
+    		{
+    			if(arr[j]>arr[j+1])
+    			{
+    				temp=arr[j];
+    				arr[j]=arr[j+1];
+    				arr[j+1]=temp;
+    			}
+    		}
+    	}
+        int arr1[]=new int[n];
+    	int first=0,last=n-1;
+    	boolean b=true;
     	for(int i=0;i<n;i++)
     	{
-    		if(arr[i]!=0)
+    		if(b)
     		{
-    		  for(int j=0;j<n;j++)
-    		  {
-    			if(arr[j]!=0)
-    			{
-    		       if(max<arr[j])
-    		       {
-    			     max=arr[j];
-                     loc=j;
-    		       }
-    			}
-    		  }
-    		  arr[loc]=0;
-    		  System.out.println("max:"+max);
-    		  max=0;
-    		  loc=0;
+    			arr1[i]=arr[last--];
     		}
+    		else
+    		{
+    			arr1[i]=arr[first++];
+    		}
+    		b=!b;
     	}
     	for(int i=0;i<n;i++)
     	{
-    		if(arr[i]!=0)
-    		{
-    			min=arr[i];
-    		  for(int j=0;j<n;j++)
-    		  {
-    			if(arr[j]!=0)
-    			{
-    		       if(min>arr[j])
-    		       {
-    			     min=arr[j];
-                     loc=j;
-    		       }
-    			}
-    		  }
-    		  arr[loc]=0;
-    		  System.out.println("min:"+min);
-    		  min=0;
-    		  loc=0;
-    		}
+    		System.out.print(arr1[i]+" ");
     	}
-    }
+   	}
 	public static void main(String[] args)
 	{
        FmaxFminSmaxSmin f=new FmaxFminSmaxSmin();
        Scanner s=new Scanner(System.in);
        System.out.println("enter n value");
        int n=s.nextInt();
-       int arr[]=new int[10];
+       int arr[]=new int[n];
        System.out.println("enter"+n+"values");
        for(int i=0;i<n;i++)
        {
@@ -65,5 +53,4 @@ public class FmaxFminSmaxSmin
        }
        f.maxMin(arr,n);
 	}
-
 }
